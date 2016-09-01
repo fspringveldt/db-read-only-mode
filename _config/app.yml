@@ -1,31 +1,3 @@
----
-Name: mysite
-After:
-  - 'framework/*'
-  - 'cms/*'
----
-
-#Injector:
-#  MyReadOnlyDB:
-#    class: MyReadOnlyDB
-#  MyReadOnlyDB:
-#    class: MySQLDatabase
-#    connect:
-#      - type: MySQLDatabase
-#        server: localhost
-#        username: root
-#        password: mysql
-#        database: SS-db-read-only-mode
-#  MySQLReadOnlyAspect:
-#    properties:
-#      writeDB: %$MyReadOnlyDB
-#  MySQLDatabase:
-#    class: AopProxyService
-#    properties:
-#      proxied: %$MyReadOnlyDB
-#      beforeCall:
-#        query:
-#          - %$MySQLWriteDbAspect
 Injector:
   RODB:
     class: MySQLDatabase

@@ -42,13 +42,6 @@
 			$connector = DB::get_connector();
 			// Test preparation of equivalent statements
 
-			$result1 = $connector->preparedQuery(
-				'INSERT INTO MySQLDatabaseTest_Data("Sort", "Title") Values(?,?)', array(
-					5,
-					'Fifth Item',
-				)
-			);
-			$this->assertEquals(0, $result1);
 
 			// Also select non-prepared statement
 			$result3 = $connector->query("INSERT INTO \"MySQLDatabaseTest_Data\" (\"Sort\", \"Title\") Values (6,'Sixth Item')");
