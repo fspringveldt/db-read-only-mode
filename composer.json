@@ -1,6 +1,6 @@
 {
   "name": "fspringveldt/db-read-only-mode",
-  "description": "Places a silverstripe website in read-only mode, blocking all write requests.",
+  "description": "Places a SilverStripe website in read-only mode, blocking all write requests.",
   "type": "silverstripe-module",
   "homepage": "https://github.com/fspringveldt/db-read-only-mode",
   "keywords": [
