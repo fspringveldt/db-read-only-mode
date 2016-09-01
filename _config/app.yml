@@ -16,4 +16,5 @@ Injector:
           - %$ReadOnlyAspect
 
 ReadOnlyMode:
-  activate: 0
+  activate: 1
+  throw-exceptions: 1

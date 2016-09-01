@@ -8,6 +8,15 @@
 	 */
 	class ReadOnlyAspect implements BeforeCallAspect
 	{
+		/**
+		 * @var bool
+		 */
+		public $activate;
+
+		/**
+		 * @var
+		 */
+		public $throwExceptions;
 
 		/**
 		 * Before call aspect which silently dis-allows write requests
@@ -26,16 +35,33 @@
 			$writes = $cfg->get('DBConnector', 'write_operations');
 
 			$writeQueries = array_merge($ddl, $writes);
-			$active = (bool)Config::inst()
-								  ->get('ReadOnlyMode', 'activate');
-			if($active)
+			if(!isset($this->activate))
+			{
+				$this->activate = (bool)Config::inst()
+											  ->get('ReadOnlyMode', 'activate');
+			}
+
+			if(!isset($this->throwExceptions))
+			{
+				$this->throwExceptions = (bool)Config::inst()
+													 ->get('ReadOnlyMode', 'throw-exceptions');
+			}
+			if($this->activate)
 			{
 				if(isset($args[0]))
 				{
 					$sql = $args[0];
-					if(in_array(strtolower(substr($sql, 0, strpos($sql, ' '))), $writeQueries))
+					$command = strtolower(substr($sql, 0, strpos($sql, ' ')));
+					if(in_array($command, $writeQueries))
 					{
-						$alternateReturn = 0;
+						if($this->throwExceptions)
+						{
+							throw new Exception(_t('ReadOnlyDBMode', 'Unable to write as the site is in ReadOnly mode'));
+						}else
+						{
+							//Softly return a zero
+							$alternateReturn = 0;
+						}
 
 						return false;
 					}

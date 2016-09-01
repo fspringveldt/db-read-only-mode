@@ -16,3 +16,10 @@ Readonly mode is de-activated by default. To switch it on, find below in [_ _con
 >   activate: 0
 
 and change the 0 to 1. Then flush again to clear the cache manifest, activating the module.
+
+## Switching off exceptions
+If you'd like to throw a catchable exception, then switch it on in [_ _config/app.yml_](_config/app.yml)
+>ReadOnlyMode:
+>   throw-exceptions: 0
+
+by changing the 0 to 1. Flush the manifest afterwards.

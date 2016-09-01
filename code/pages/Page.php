@@ -33,24 +33,11 @@
 		public function init()
 		{
 			parent::init();
-			//			$cfg = Config::inst()
-			//						 ->get('ReadOnlyMode', 'activate');
-			//			echo "Value is: {$cfg}";
-			// You can include any CSS or JS required by your project here.
-			// See: http://doc.silverstripe.org/framework/en/reference/requirements
-			//			get_class(DB)
-			//			$result2 = DB::preparedQuery("SELECT * FROM UserLogin where 1 = ? ", array(1));
-			//			var_dump($result, $result2);
 
 		}
 
 		public function index()
 		{
-//			$result = DB::query("INSERT INTO \"UserLogin\" (Created,IPAddress) VALUES ('" . date('Y-m-d H:i:s') . "','" . $_SERVER['REMOTE_ADDR'] . "')");
-//			var_dump($result);
-//			UserLogin::create()
-//					 ->write();
-
 			return $this;
 		}
 
