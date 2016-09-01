@@ -1,9 +1,9 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
+//	error_reporting(E_ALL);
+//	ini_set('display_errors',1);
 	date_default_timezone_set('Europe/Berlin');
 	global $project;
-	$project = 'mysite';
+	$project = 'db-read-only-mode';
 
 	require_once('conf/ConfigureFromEnv.php');
 
