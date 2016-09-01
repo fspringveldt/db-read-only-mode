@@ -1,0 +1,15 @@
+{
+    "name": "fspringveldt/db-read-only-mode",
+    "description": "Places a silverstripe website in read-only mode, blocking all write requests.",
+    "type": "silverstripe-module",
+    "require": {
+        "silverstripe/framework": "^3.4",
+        "silverstripe/cms": "^3.4"
+    },
+    "authors": [
+        {
+            "name": "Franco Springveldt",
+            "email": "fspringveldt@gmail.com"
+        }
+    ]
+}
