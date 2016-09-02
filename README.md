@@ -11,7 +11,7 @@ To install, run below from root of SilverStripe installation
 ```bash 
 > composer require fspringveldt/db-read-only-mode
 ``` 
-http://<your site url>?flush=1 once composer is complete the flush the manifest.
+http://<your-site-url>?flush=1 once composer is complete the flush the manifest.
 
 ## Switching it on and off
 Readonly mode is de-activated by default. To switch it on, find below in [_ _config/app.yml_](_config/app.yml)
