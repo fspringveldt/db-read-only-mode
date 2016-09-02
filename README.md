@@ -7,8 +7,11 @@ silverstripe/framework: ^3.4.*
 silverstripe/cms: ^3.4.*
 ```
 ## Installation and Setup
-This is very easy. Simply following the default [module installation instructions found here](https://docs.silverstripe.org/en/3.4/developer_guides/extending/modules/#installation).
-Once installed, perform a flush of your website [flush-instructions]([click here for more on this](https://docs.silverstripe.org/en/3.4/developer_guides/performance/caching/#built-in-caches)) 
+To install, run below from root of SilverStripe installation
+```bash 
+> composer require fspringveldt/db-read-only-mode
+``` 
+http://<your site url>?flush=1 once composer is complete the flush the manifest.
 
 ## Switching it on and off
 Readonly mode is de-activated by default. To switch it on, find below in [_ _config/app.yml_](_config/app.yml)
