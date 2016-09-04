@@ -21,38 +21,23 @@
 		/**
 		 * Before call aspect which silently dis-allows write requests
 		 *
-		 * @param object $proxied
-		 * @param string $method
-		 * @param string $args
-		 * @param mixed  $alternateReturn
+		 * @param MySQLDatabase $proxied
+		 * @param string        $method
+		 * @param string        $args
+		 * @param mixed         $alternateReturn
 		 *
 		 * @return bool
 		 */
 		public function beforeCall($proxied, $method, $args, &$alternateReturn)
 		{
-			$cfg = Config::inst();
-			$ddl = $cfg->get('DBConnector', 'ddl_operations');
-			$writes = $cfg->get('DBConnector', 'write_operations');
-
-			$writeQueries = array_merge($ddl, $writes);
-			if(!isset($this->activate))
-			{
-				$this->activate = (bool)Config::inst()
-											  ->get('ReadOnlyMode', 'activate');
-			}
-
-			if(!isset($this->throwExceptions))
-			{
-				$this->throwExceptions = (bool)Config::inst()
-													 ->get('ReadOnlyMode', 'throw-exceptions');
-			}
+			//Re-use $proxied->getConnector() to check if the query is mutable
+			$connector = $proxied->getConnector();
 			if($this->activate)
 			{
 				if(isset($args[0]))
 				{
 					$sql = $args[0];
-					$command = strtolower(substr($sql, 0, strpos($sql, ' ')));
-					if(in_array($command, $writeQueries))
+					if($connector->isQueryMutable($sql))
 					{
 						if($this->throwExceptions)
 						{

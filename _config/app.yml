@@ -14,7 +14,7 @@ Injector:
           - %$ReadOnlyAspect
         preparedQuery:
           - %$ReadOnlyAspect
-
-ReadOnlyMode:
-  activate: 1
-  throw-exceptions: 1
+  ReadOnlyAspect:
+    properties:
+      activate: 1
+      throwExceptions: 0

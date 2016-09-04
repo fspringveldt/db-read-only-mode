@@ -12,36 +12,32 @@
 	 */
 	class ReadOnlyAspectTest extends SapphireTest
 	{
-		protected static $fixture_file = 'ReadOnlyAspectYaml.yml';
+
+		protected $extraDataObjects = array(
+			'UserLoginTest',
+		);
 
 
 		public function testBeforeMethodsCalled()
 		{
 			// Test preparation of equivalent statements
-			$connector = DB::get_connector();
-
-			$result1 = $connector->preparedQuery(
-				'SELECT "Sort", "Title" FROM "MySQLDatabaseTest_Data" WHERE "Sort" > ? ORDER BY "Sort"', array(0)
-			);
-
-			$this->assertInstanceOf('MySQLStatement', $result1);
-
-			// Also select non-prepared statement
-			$result3 = $connector->query('SELECT "Sort", "Title" FROM "MySQLDatabaseTest_Data" ORDER BY "Sort"');
-			$this->assertInstanceOf('MySQLQuery', $result3);
+			$rowCount = UserLoginTest::get()
+									 ->count();
+			$this->assertEquals(0, $rowCount);
 
 		}
 
 		public function testBeforeMethodBlocks()
 		{
-			Config::inst()
-				  ->update('ReadOnlyMode', 'active', 1);
-			// Test preparation of equivalent statements
+			$injector = Injector::inst();
+			//First testWrites are blocked
+			UserLoginTest::create()
+						 ->write();
 
-			$obj = new UserLoginTest();
-			$id = $obj->write();
-
-			$this->assertEquals(0, $id);
+			$this->assertEquals(
+				1, UserLoginTest::get()
+								->count()
+			);
 
 		}
 	}
@@ -54,7 +50,7 @@
 	 * @property string IPAddress
 	 *
 	 */
-	class UserLoginTest extends DataObject implements TestOnly
+	class    UserLoginTest extends DataObject implements TestOnly
 	{
 		static $db = array(
 			'IPAddress' => 'Varchar(50)',
