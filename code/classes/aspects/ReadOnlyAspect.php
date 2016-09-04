@@ -21,7 +21,7 @@
 		/**
 		 * Before call aspect which silently dis-allows write requests
 		 *
-		 * @param MySQLDatabase $proxied
+		 * @param SS_Database $proxied
 		 * @param string        $method
 		 * @param string        $args
 		 * @param mixed         $alternateReturn
